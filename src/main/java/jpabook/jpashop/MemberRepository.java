@@ -1,9 +1,11 @@
-package jpabook;
+package jpabook.jpashop;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
+
+import jpabook.jpashop.domain.Member;
 
 @Repository
 public class MemberRepository {
