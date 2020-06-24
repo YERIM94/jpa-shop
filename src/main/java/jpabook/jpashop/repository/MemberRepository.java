@@ -1,18 +1,19 @@
 package jpabook.jpashop.repository;
 
-import java.lang.reflect.Member;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import jpabook.jpashop.domain.Member;
+import lombok.RequiredArgsConstructor;
+
 @Repository //component스캔의 대상이 돼서 자동으로 스프링 빈에 등록뒴 
+@RequiredArgsConstructor //EntityManager는 원래 @Autowired 아니라 @PersistenceContext 표준어노테이션 사용해야 하지만 스프링에서 @Autowired도 허용해줌 -> @RequiredArgsConstructor도 사용가능  
 public class MemberRepository {
 	
-	@PersistenceContext
-	private EntityManager em;
+	private final EntityManager em;
 	
 	public void save(Member member) {
 		em.persist(member);

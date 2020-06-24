@@ -10,8 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import jpabook.jpashop.MemberRepository;
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.repository.MemberRepository;
 
 import static org.junit.Assert.*;
 
