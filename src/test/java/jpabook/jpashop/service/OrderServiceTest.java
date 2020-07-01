@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import javax.persistence.EntityManager;
@@ -60,10 +61,20 @@ public class OrderServiceTest {
 	@Test
 	public void 주문취소() throws Exception{
 		//given
+		Member member = createMember();
+		Item book = createBook("hihi", 10000, 10);
 		
+		int orderCount = 2;
+		
+		Long orderId = orderService.order(member.getId(), book.getId(), orderCount);
 		//when
+		orderService.cancelOrder(orderId);
 		
 		//then
+		Order order = orderRepository.findOne(orderId);
+		
+		Assert.assertEquals("주문취소시 상태는 cancel", OrderStatus.CANCEL, order.getStatus());
+		Assert.assertEquals("주문이 취소된 상품은 재고가 원상복구 되어야 한다.", 10, book.getStockQuantity());
 	}
 	
 	@Test(expected = NotEnoughStockException.class)
