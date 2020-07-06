@@ -1,5 +1,7 @@
 package jpabook.jpashop.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/members/new")
-	public String create(@Valid MemberForm form, BindingResult result) {
+	public String create(@Valid MemberForm form, BindingResult result) { //form 대신 entity 써도 되지만 화면 기능 추가하려고 entity 코드 늘어나므로 form 객체 쓰는게 나음
 		
 		if(result.hasErrors()) {
 			return "members/createMemberForm";
@@ -38,5 +40,13 @@ public class MemberController {
 		
 		memberService.join(member);;
 		return "redirect:/";
+	}
+	
+	@GetMapping("/members")
+	public String list(Model model) {
+		List<Member> members = memberService.findMembers();
+		model.addAttribute("members",members); //사실 member entity 그대로 넘기기보다 화면에 맞게 dto 만들어서 넘기는게 정석임
+		return "members/memberList";
+		
 	}
 }
