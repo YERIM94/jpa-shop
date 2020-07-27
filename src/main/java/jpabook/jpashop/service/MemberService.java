@@ -45,4 +45,11 @@ public class MemberService {
 	public Member findOne(Long memberId) {
 		return memberRepository.findOne(memberId);
 	}
+	
+	@Transactional
+	public void update(Long id, String name) {
+		Member member = memberRepository.findOne(id);
+		member.setName(name);
+		//update된 member 반환해도 되지만, 그러면 하나의 메소드 안에 조회, 변경성 쿼리 둘 다 들어가서 비추(걍 개인 개발스타일) 
+	}
 }
