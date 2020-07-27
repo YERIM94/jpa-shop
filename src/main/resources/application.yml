@@ -7,7 +7,8 @@ spring:
     
   jpa:
     hibernate:
-      ddl-auto: create #app실행시점에 내가 가지고 있는 테이블 다 지우고 엔티티정보에 따라 테이블 다시 생성
+      ddl-auto: none
+      # create #app실행시점에 내가 가지고 있는 테이블 다 지우고 엔티티정보에 따라 테이블 다시 생성
     properties:
 #      show_sql: true #logging:level:org.hibernate.SQL과 동일한 역할 but show_sql:sysout에 로그찍음, org.~:로거통해 로그찍
       format_sql: true
