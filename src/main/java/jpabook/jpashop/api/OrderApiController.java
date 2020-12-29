@@ -45,6 +45,15 @@ public class OrderApiController {
 		return collect;
 	}
 	
+	//컬렉션조회 최적화 v3: 엔티티 DTO로 변환 후 페치조인 사용해서 노출 
+	@GetMapping("/api/v3/orders")
+	public List<OrderDto> ordersV3(){
+		List<Order> orders = orderRepository.findALlWithItem();
+		List<OrderDto> collect = orders.stream().map(o -> new OrderDto(o)).collect(Collectors.toList());
+		
+		return collect;
+	}
+	
 	@Getter
 	static class OrderDto{
 		private Long orderId;
